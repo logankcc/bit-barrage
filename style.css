@@ -1,0 +1,73 @@
+/* Global styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+/* Background style for the "Select Game Mode" page */
+body.select-game-mode {
+    background-image: url('assets/images/select-game-mode-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    image-rendering: pixelated; 
+}
+
+/* Centering container styles */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Button styles */
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Image styles for all buttons */
+button img {
+    transform: scale(5);
+    image-rendering: pixelated;
+}
+
+/* Hover state for the "Play" button */
+#playButton:hover img {
+    content: url('assets/sprites/buttons/hover/play-button-hover.png');
+}
+
+#singlePlayerButton {
+    position: absolute;
+    top: 460px;
+    left: 440px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Hover state for the "Single Player" button */
+#singlePlayerButton:hover img {
+    content: url('assets/sprites/buttons/hover/single-player-button-hover.png');
+}
+
+#multiPlayerButton {
+    position: absolute;
+    top: 460px;
+    left: 1000px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Hover state for the "Multi Player" button */
+#multiPlayerButton:hover img {
+    content: url('assets/sprites/buttons/hover/multi-player-button-hover.png');
+}
