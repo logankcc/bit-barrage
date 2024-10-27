@@ -1,29 +1,14 @@
-/* Global styles */
+/* ---------------------------------------------------------------------------------------------
+    Global Styles
+   --------------------------------------------------------------------------------------------- */
+
 body {
     margin: 0;
     padding: 0;
     background-color: #fff;
 }
 
-/* Background style for the "Select Game Mode" page */
-body.select-game-mode {
-    background-image: url('assets/images/select-game-mode-background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    image-rendering: pixelated; 
-}
-
-/* Centering container styles */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Button styles */
+/* Button styles*/
 button {
     border: none;
     background: none;
@@ -37,37 +22,41 @@ button img {
     image-rendering: pixelated;
 }
 
-/* Hover state for the "Play" button */
-#playButton:hover img {
+/* ---------------------------------------------------------------------------------------------
+    Home Screen Styles
+   --------------------------------------------------------------------------------------------- */
+
+#home-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background-image: url('assets/images/default-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    image-rendering: pixelated;
+}
+
+/* Hover state for the Play button */
+#play-button:hover img {
     content: url('assets/sprites/buttons/hover/play-button-hover.png');
 }
 
-#singlePlayerButton {
-    position: absolute;
-    top: 460px;
-    left: 440px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 0;
-}
+/* ---------------------------------------------------------------------------------------------
+   Select Game Mode Screen Styles
+   --------------------------------------------------------------------------------------------- */
 
-/* Hover state for the "Single Player" button */
-#singlePlayerButton:hover img {
-    content: url('assets/sprites/buttons/hover/single-player-button-hover.png');
-}
+#select-game-mode-screen {
+    display: none;
+    height: 100vh;
 
-#multiPlayerButton {
-    position: absolute;
-    top: 460px;
-    left: 1000px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 0;
-}
+    background-image: url('assets/images/select-game-mode-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
-/* Hover state for the "Multi Player" button */
-#multiPlayerButton:hover img {
-    content: url('assets/sprites/buttons/hover/multi-player-button-hover.png');
+    image-rendering: pixelated;
 }

@@ -1,12 +1,59 @@
-document.getElementById("playButton").addEventListener("click", function() {
-    // Navigate to the "Select Game Mode" page
-    window.location.href = "select-game-mode.html";
-});
+console.log('JavaScript is running!');
 
-document.getElementById("singlePlayerButton").addEventListener("click", function() {
-    alert("Still in development!");
-});
+// ------------------------------------------------------------------------------------------------
+//  Home Screen Logic
+// ------------------------------------------------------------------------------------------------
 
-document.getElementById("multiPlayerButton").addEventListener("click", function() {
-    alert("Still in development!");
-});
+const homeScreen = (() => {
+    // Get HTML element IDs
+    const homeElement = document.getElementById('home-screen');
+    const playButton = document.getElementById('play-button');
+
+    // Function to show the Home screen
+    const show = () => {
+        homeElement.style.display = 'block';
+    };
+
+    // Function to hide the Home screen
+    const hide = () => {
+        homeElement.style.display = 'none';
+    };
+
+    // Play button click event listener
+    playButton.addEventListener('click', () => {
+        console.log('Play button clicked!');
+        hide();
+        selectGameModeScreen.show();
+    });
+
+    // Expose public functions
+    return {
+        show,
+        hide
+    };
+})();
+
+// ------------------------------------------------------------------------------------------------
+//  Select Game Mode Screen Logic
+// ------------------------------------------------------------------------------------------------
+
+const selectGameModeScreen = (() => {
+    // Get HTML element IDs
+    const gameModeElement = document.getElementById('select-game-mode-screen');
+
+    // Function to show the Select Game Mode screen
+    const show = () => {
+        gameModeElement.style.display = 'block';
+    };
+
+    // Function to hide the Select Game Mode screen
+    const hide = () => {
+        gameModeElement.style.display = 'none';
+    };
+
+    // Expose public functions
+    return {
+        show,
+        hide
+    };
+})();
