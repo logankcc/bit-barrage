@@ -11,9 +11,14 @@
     --background-sprite-width: 384;
     --background-sprite-height: 216;
 
-    /* Aspect Ratio */
+    /* Aspect Ratios */
     --aspect-ratio-width: 16;
     --aspect-ratio-height: 9;
+
+    /* Button Widths */
+    --small-button-width: calc(16 / var(--background-sprite-width) * 100%);
+    --medium-button-width: calc(64 / var(--background-sprite-width) * 100%);
+    --large-button-width: calc(96 / var(--background-sprite-width) * 100%);
 }
 
 /* ---------------------------------------------------------------------------------------------
@@ -73,6 +78,31 @@ button img {
     image-rendering: pixelated;
 }
 
+.back-button {
+    position: absolute;
+    top: calc(12 / var(--background-sprite-height) * 100%);
+    left: calc(320 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+.instructions-button {
+    position: absolute;
+    top: calc(12 / var(--background-sprite-height) * 100%);
+    left: calc(352 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+/* Hover states for reusable buttons */
+.back-button:hover img {
+    content: url('assets/sprites/buttons/hover/back-button-hover.png');
+}
+
+.instructions-button:hover img {
+    content: url('assets/sprites/buttons/hover/instructions-button-hover.png');
+}
+
 /* ---------------------------------------------------------------------------------------------
     Home Screen Styles
    --------------------------------------------------------------------------------------------- */
@@ -88,7 +118,7 @@ button img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: calc(64 / var(--background-sprite-width) * 100%);
+    width: var(--medium-button-width);
     height: auto;
 }
 
@@ -110,7 +140,7 @@ button img {
     position: absolute;
     top: calc(92 / var(--background-sprite-height) * 100%);
     left: calc(88 / var(--background-sprite-width) * 100%);
-    width: calc(96 / var(--background-sprite-width) * 100%);
+    width: var(--large-button-width);
     height: auto;
 }
 
@@ -119,7 +149,7 @@ button img {
     position: absolute;
     top: calc(92 / var(--background-sprite-height) * 100%);
     left: calc(200 / var(--background-sprite-width) * 100%);
-    width: calc(96 / var(--background-sprite-width) * 100%);
+    width: var(--large-button-width);
     height: auto;
 }
 
@@ -131,4 +161,40 @@ button img {
 /* Hover state for the Multiplayer button */
 #multi-player-button:hover img {
     content: url('assets/sprites/buttons/hover/multi-player-button-hover.png');
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Select Difficulty Screen Styles
+   --------------------------------------------------------------------------------------------- */
+
+#select-difficulty-screen {
+    background-image: url('assets/images/select-difficulty-background.png');
+}
+
+/* Position the Easy button */
+#easy-button {
+    position: absolute;
+    top: calc(92 / var(--background-sprite-height) * 100%);
+    left: calc(88 / var(--background-sprite-width) * 100%);
+    width: var(--large-button-width);
+    height: auto;
+}
+
+/* Position the Hard button */
+#hard-button {
+    position: absolute;
+    top: calc(92 / var(--background-sprite-height) * 100%);
+    left: calc(200 / var(--background-sprite-width) * 100%);
+    width: var(--large-button-width);
+    height: auto;
+}
+
+/* Hover state for the Easy button */
+#easy-button:hover img {
+    content: url('assets/sprites/buttons/hover/easy-button-hover.png');
+}
+
+/* Hover state for the Hard button */
+#hard-button:hover img {
+    content: url('assets/sprites/buttons/hover/hard-button-hover.png');
 }

@@ -1,4 +1,9 @@
 // ------------------------------------------------------------------------------------------------
+//  Global Variables
+// ------------------------------------------------------------------------------------------------
+previousScreen = undefined;
+
+// ------------------------------------------------------------------------------------------------
 //  Home Screen Logic
 // ------------------------------------------------------------------------------------------------
 
@@ -14,6 +19,7 @@ const homeScreen = (() => {
 
     // Function to hide the Home screen
     const hide = () => {
+        previousScreen = homeElement;
         homeElement.style.display = 'none';
     };
 
@@ -28,6 +34,26 @@ const homeScreen = (() => {
         show,
         hide
     };
+})();
+
+// ------------------------------------------------------------------------------------------------
+//  Shared Button Logic
+// ------------------------------------------------------------------------------------------------
+
+const sharedButtonLogic = (() => {
+    // Get HTML element IDs
+    const backButton = document.getElementById('back-button');
+    const instructionsButton = document.getElementById('instructions-button');
+
+    // Back button click event listener
+    backButton.addEventListener('click', () => {
+        console.log('Back button pressed!');
+    });
+
+    // Instructions button click event listener
+    instructionsButton.addEventListener('click', () => {
+        console.log('Instructions button pressed!');
+    });
 })();
 
 // ------------------------------------------------------------------------------------------------
@@ -47,17 +73,57 @@ const selectGameModeScreen = (() => {
 
     // Function to hide the Select Game Mode screen
     const hide = () => {
+        previousScreen = selectGameModeScreen;
         gameModeElement.style.display = 'none';
     };
 
     // Single Player button click event listener
     singlePlayerButton.addEventListener('click', () => {
-        console.log('Single Player button pressed!')
+        hide();
+        selectDifficultyScreen.show();
     });
 
     // Multiplayer button click event listener
     multiPlayerButton.addEventListener('click', () => {
-        console.log('Multiplayer button pressed!')
+        console.log('Multiplayer button pressed!');
+    });
+
+    // Expose public functions
+    return {
+        show,
+        hide
+    };
+})();
+
+// ------------------------------------------------------------------------------------------------
+//  Select Difficulty Screen Logic
+// ------------------------------------------------------------------------------------------------
+
+const selectDifficultyScreen = (() => {
+    // Get HTML element IDs
+    const difficultyElement = document.getElementById('select-difficulty-screen');
+    const easyButton = document.getElementById('easy-button');
+    const hardButton = document.getElementById('hard-button');
+
+    // Function to show the Select Difficulty screen
+    const show = () => {
+        difficultyElement.style.display = 'flex';
+    };
+
+    // Function to hide the Select Difficulty screen
+    const hide = () => {
+        previousScreen = selectDifficultyScreen;
+        difficultyElement.style.display = 'none';
+    };
+
+    // Easy button click event listener
+    easyButton.addEventListener('click', () => {
+        console.log('Easy button pressed!');
+    });
+
+    // Hard button click event listener
+    hardButton.addEventListener('click', () => {
+        console.log('Hard button pressed!');
     });
 
     // Expose public functions
