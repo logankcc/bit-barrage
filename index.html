@@ -7,26 +7,30 @@
     <title>Bit Barrage</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preload" href="assets/images/default-background.png" as="image">
+    <link rel="preload" href="assets/images/select-game-mode-background.png" as="image">
 </head>
 
 <body>
-    <!-- Home Screen -->
-    <div id="home-screen">
-        <button id="play-button" type="button">
-            <img src="assets/sprites/buttons/idle/play-button-idle.png" alt="Play">
-        </button>
+    <!-- Game Container -->
+    <div id="game-container">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen">
+            <button id="play-button" type="button">
+                <img src="assets/sprites/buttons/idle/play-button-idle.png">
+            </button>
+        </div>
+        <!-- Select Game Mode Screen -->
+        <div id="select-game-mode-screen" class="screen">
+            <button id="single-player-button" type="button">
+                <img src="assets/sprites/buttons/idle/single-player-button-idle.png">
+            </button>
+            <button id="multi-player-button" type="button">
+                <img src="assets/sprites/buttons/idle/multi-player-button-idle.png">
+            </button>
+        </div>
     </div>
-    <!-- Select Game Mode Screen -->
-    <div id="select-game-mode-screen">
-        <!-- TODO: Implement buttons
-        <button id="single-player-button" type="button">
-            <img src="assets/sprites/buttons/idle/single-player-button-idle.png" alt="Single Player">
-        </button>
-        <button id="multi-player-button" type="button">
-            <img src="assets/sprites/buttons/idle/multi-player-button-idle.png" alt="Multiplayer">
-        </button>
-        -->
-    </div>
+
     <script src="script.js"></script>
 </body>
 

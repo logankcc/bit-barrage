@@ -1,5 +1,3 @@
-console.log('JavaScript is running!');
-
 // ------------------------------------------------------------------------------------------------
 //  Home Screen Logic
 // ------------------------------------------------------------------------------------------------
@@ -11,7 +9,7 @@ const homeScreen = (() => {
 
     // Function to show the Home screen
     const show = () => {
-        homeElement.style.display = 'block';
+        homeElement.style.display = 'flex';
     };
 
     // Function to hide the Home screen
@@ -21,7 +19,6 @@ const homeScreen = (() => {
 
     // Play button click event listener
     playButton.addEventListener('click', () => {
-        console.log('Play button clicked!');
         hide();
         selectGameModeScreen.show();
     });
@@ -40,16 +37,28 @@ const homeScreen = (() => {
 const selectGameModeScreen = (() => {
     // Get HTML element IDs
     const gameModeElement = document.getElementById('select-game-mode-screen');
+    const singlePlayerButton = document.getElementById('single-player-button');
+    const multiPlayerButton = document.getElementById('multi-player-button');
 
     // Function to show the Select Game Mode screen
     const show = () => {
-        gameModeElement.style.display = 'block';
+        gameModeElement.style.display = 'flex';
     };
 
     // Function to hide the Select Game Mode screen
     const hide = () => {
         gameModeElement.style.display = 'none';
     };
+
+    // Single Player button click event listener
+    singlePlayerButton.addEventListener('click', () => {
+        console.log('Single Player button pressed!')
+    });
+
+    // Multiplayer button click event listener
+    multiPlayerButton.addEventListener('click', () => {
+        console.log('Multiplayer button pressed!')
+    });
 
     // Expose public functions
     return {
