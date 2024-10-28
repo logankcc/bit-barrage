@@ -4,7 +4,7 @@
 
 :root {
     /* Colors */
-    --background-color: #ffffff;
+    --background-color: white;
 
     /* Dimensions */
     --container-width: 80vw;
@@ -81,7 +81,7 @@ button img {
 .back-button {
     position: absolute;
     top: calc(12 / var(--background-sprite-height) * 100%);
-    left: calc(320 / var(--background-sprite-width) * 100%);
+    left: calc(352 / var(--background-sprite-width) * 100%);
     width: var(--small-button-width);
     height: auto;
 }
@@ -89,7 +89,7 @@ button img {
 .instructions-button {
     position: absolute;
     top: calc(12 / var(--background-sprite-height) * 100%);
-    left: calc(352 / var(--background-sprite-width) * 100%);
+    left: calc(320 / var(--background-sprite-width) * 100%);
     width: var(--small-button-width);
     height: auto;
 }

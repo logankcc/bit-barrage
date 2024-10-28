@@ -1,134 +1,80 @@
 // ------------------------------------------------------------------------------------------------
-//  Global Variables
-// ------------------------------------------------------------------------------------------------
-previousScreen = undefined;
-
-// ------------------------------------------------------------------------------------------------
-//  Home Screen Logic
+//  Helper Functions
 // ------------------------------------------------------------------------------------------------
 
-const homeScreen = (() => {
+function setupButtonListener(button, message) {
+    if (message) {
+        button.addEventListener('click', () => {
+            console.log(message);
+        });
+    } else {
+        const currentScreen = button.closest('div');
+        const nextScreenID = button.getAttribute('data-next-screen');
+        const nextScreen = document.getElementById(nextScreenID);
+        button.addEventListener('click', () => changeScreen(currentScreen, nextScreen));
+    }
+}
+
+function changeScreen(currentScreen, nextScreen) {
+    currentScreen.style.display = 'none';
+    nextScreen.style.display = 'flex';
+}
+
+function onBackButtonClick(event) {
+    const backButton = event.currentTarget;
+    const currentScreen = backButton.closest('div');
+    const previousScreenID = backButton.getAttribute('data-previous-screen');
+    const previousScreen = document.getElementById(previousScreenID);
+    changeScreen(currentScreen, previousScreen);
+}
+
+// ------------------------------------------------------------------------------------------------
+//  Event Listener Initialization Functions
+// ------------------------------------------------------------------------------------------------
+
+function initHomeScreenListeners() {
     // Get HTML element IDs
-    const homeElement = document.getElementById('home-screen');
     const playButton = document.getElementById('play-button');
 
-    // Function to show the Home screen
-    const show = () => {
-        homeElement.style.display = 'flex';
-    };
+    // Add event listeners
+    setupButtonListener(playButton);
+}
 
-    // Function to hide the Home screen
-    const hide = () => {
-        previousScreen = homeElement;
-        homeElement.style.display = 'none';
-    };
-
-    // Play button click event listener
-    playButton.addEventListener('click', () => {
-        hide();
-        selectGameModeScreen.show();
-    });
-
-    // Expose public functions
-    return {
-        show,
-        hide
-    };
-})();
-
-// ------------------------------------------------------------------------------------------------
-//  Shared Button Logic
-// ------------------------------------------------------------------------------------------------
-
-const sharedButtonLogic = (() => {
+function initSelectGameModeScreenListeners() {
     // Get HTML element IDs
-    const backButton = document.getElementById('back-button');
-    const instructionsButton = document.getElementById('instructions-button');
-
-    // Back button click event listener
-    backButton.addEventListener('click', () => {
-        console.log('Back button pressed!');
-    });
-
-    // Instructions button click event listener
-    instructionsButton.addEventListener('click', () => {
-        console.log('Instructions button pressed!');
-    });
-})();
-
-// ------------------------------------------------------------------------------------------------
-//  Select Game Mode Screen Logic
-// ------------------------------------------------------------------------------------------------
-
-const selectGameModeScreen = (() => {
-    // Get HTML element IDs
-    const gameModeElement = document.getElementById('select-game-mode-screen');
     const singlePlayerButton = document.getElementById('single-player-button');
     const multiPlayerButton = document.getElementById('multi-player-button');
 
-    // Function to show the Select Game Mode screen
-    const show = () => {
-        gameModeElement.style.display = 'flex';
-    };
+    // Add event listeners
+    setupButtonListener(singlePlayerButton);
+    setupButtonListener(multiPlayerButton, 'Multiplayer button pressed!');
+}
 
-    // Function to hide the Select Game Mode screen
-    const hide = () => {
-        previousScreen = selectGameModeScreen;
-        gameModeElement.style.display = 'none';
-    };
-
-    // Single Player button click event listener
-    singlePlayerButton.addEventListener('click', () => {
-        hide();
-        selectDifficultyScreen.show();
-    });
-
-    // Multiplayer button click event listener
-    multiPlayerButton.addEventListener('click', () => {
-        console.log('Multiplayer button pressed!');
-    });
-
-    // Expose public functions
-    return {
-        show,
-        hide
-    };
-})();
-
-// ------------------------------------------------------------------------------------------------
-//  Select Difficulty Screen Logic
-// ------------------------------------------------------------------------------------------------
-
-const selectDifficultyScreen = (() => {
+function initSelectDifficultyScreenListeners() {
     // Get HTML element IDs
-    const difficultyElement = document.getElementById('select-difficulty-screen');
     const easyButton = document.getElementById('easy-button');
     const hardButton = document.getElementById('hard-button');
 
-    // Function to show the Select Difficulty screen
-    const show = () => {
-        difficultyElement.style.display = 'flex';
-    };
+    // Add event listeners
+    setupButtonListener(easyButton, 'Easy button pressed!');
+    setupButtonListener(hardButton, 'Hard button pressed!');
+}
 
-    // Function to hide the Select Difficulty screen
-    const hide = () => {
-        previousScreen = selectDifficultyScreen;
-        difficultyElement.style.display = 'none';
-    };
+function initBackButtonListener() {
+    // Get HTML element IDs
+    const backButtons = document.querySelectorAll('.back-button');
 
-    // Easy button click event listener
-    easyButton.addEventListener('click', () => {
-        console.log('Easy button pressed!');
+    // Add event listeners
+    backButtons.forEach(button => {
+        button.addEventListener('click', (event) => onBackButtonClick(event));
     });
+}
 
-    // Hard button click event listener
-    hardButton.addEventListener('click', () => {
-        console.log('Hard button pressed!');
-    });
+// ------------------------------------------------------------------------------------------------
+//  Initialize All Event Listeners
+// ------------------------------------------------------------------------------------------------
 
-    // Expose public functions
-    return {
-        show,
-        hide
-    };
-})();
+initHomeScreenListeners();
+initSelectGameModeScreenListeners();
+initSelectDifficultyScreenListeners();
+initBackButtonListener();

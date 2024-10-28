@@ -19,22 +19,22 @@
     <div id="game-container">
         <!-- Home Screen -->
         <div id="home-screen" class="screen">
-            <button id="play-button" type="button">
+            <button id="play-button" data-next-screen="select-game-mode-screen" type="button">
                 <img src="assets/sprites/buttons/idle/play-button-idle.png">
             </button>
         </div>
         <!-- Select Game Mode Screen -->
         <div id="select-game-mode-screen" class="screen">
-            <button id="single-player-button" type="button">
+            <button id="single-player-button" data-next-screen="select-difficulty-screen" type="button">
                 <img src="assets/sprites/buttons/idle/single-player-button-idle.png">
             </button>
             <button id="multi-player-button" type="button">
                 <img src="assets/sprites/buttons/idle/multi-player-button-idle.png">
             </button>
-            <button id="back-button" class="back-button" type="button">
+            <button class="back-button" data-previous-screen="home-screen" type="button">
                 <img src="assets/sprites/buttons/idle/back-button-idle.png">
             </button>
-            <button id="instructions-button" class="instructions-button" type="button">
+            <button class="instructions-button" type="button">
                 <img src="assets/sprites/buttons/idle/instructions-button-idle.png">
             </button>
         </div>
@@ -46,10 +46,10 @@
             <button id="hard-button" type="button">
                 <img src="assets/sprites/buttons/idle/hard-button-idle.png">
             </button>
-            <button id="back-button" class="back-button" type="button">
+            <button class="back-button" data-previous-screen="select-game-mode-screen" type="button">
                 <img src="assets/sprites/buttons/idle/back-button-idle.png">
             </button>
-            <button id="instructions-button" class="instructions-button" type="button">
+            <button class="instructions-button" type="button">
                 <img src="assets/sprites/buttons/idle/instructions-button-idle.png">
             </button>
         </div>
