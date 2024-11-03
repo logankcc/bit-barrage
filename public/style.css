@@ -163,15 +163,14 @@ button img {
 
 #home-screen {
     display: flex;
-    background-image: url('assets/images/default-background.png');
+    background-image: url('assets/images/home-background.png');
 }
 
 /* Position the Play button */
 #play-button {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    top: calc(144 / var(--background-sprite-height) * 100%);
+    left: calc(160 / var(--background-sprite-width) * 100%);
     width: var(--medium-button-width);
     height: auto;
 }
