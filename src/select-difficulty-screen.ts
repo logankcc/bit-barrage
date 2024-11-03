@@ -13,7 +13,8 @@ export class SelectDifficultyScreen extends Screen {
     initListeners(): void {
         this.initButtonListener(document.getElementById('easy-button'));
         this.initButtonListener(document.getElementById('hard-button'));
-        this.initBackButtonListener()
+        this.initBackButtonListener();
+        this.initInstructionsButtonListener();
         this.initMusicButtonListener();
         this.initSoundButtonListener();
     }

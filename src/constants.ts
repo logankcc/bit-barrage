@@ -9,7 +9,8 @@ export const enum ScreenID {
     INSTRUCTIONS = 'instructions-screen',
     SELECT_GAME_MODE = 'select-game-mode-screen',
     SELECT_DIFFICULTY = 'select-difficulty-screen',
-    FLEET_DEPLOYMENT = 'fleet-deployment-screen'
+    FLEET_DEPLOYMENT = 'fleet-deployment-screen',
+    GAMEPLAY = 'gameplay-screen'
 }
 
 export const enum ButtonID {

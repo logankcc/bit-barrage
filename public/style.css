@@ -19,6 +19,8 @@
     --small-button-width: calc(16 / var(--background-sprite-width) * 100%);
     --medium-button-width: calc(64 / var(--background-sprite-width) * 100%);
     --large-button-width: calc(96 / var(--background-sprite-width) * 100%);
+    --shuffle-button-width: calc(32 / var(--background-sprite-width) * 100%);
+    --ready-button-width: calc(48 / var(--background-sprite-width) * 100%);
 }
 
 /* ---------------------------------------------------------------------------------------------
@@ -131,11 +133,13 @@ button img {
     content: url('assets/sprites/buttons/idle/music-off-button-idle.png');
 }
 
-.music-button.music-on:hover  img {
+/* Hover state for the Music-On button */
+.music-button.music-on:hover img {
     content: url('assets/sprites/buttons/hover/music-on-button-hover.png');
 }
 
-.music-button.music-off:hover  img {
+/* Hover state for the Music-Off button */
+.music-button.music-off:hover img {
     content: url('assets/sprites/buttons/hover/music-off-button-hover.png');
 }
 
@@ -148,11 +152,13 @@ button img {
     content: url('assets/sprites/buttons/idle/sound-off-button-idle.png');
 }
 
-.sound-button.sound-on:hover  img {
+/* Hover state for the Sound-On button */
+.sound-button.sound-on:hover img {
     content: url('assets/sprites/buttons/hover/sound-on-button-hover.png');
 }
 
-.sound-button.sound-off:hover  img {
+/* Hover state for the Sound-Off button */
+.sound-button.sound-off:hover img {
     content: url('assets/sprites/buttons/hover/sound-off-button-hover.png');
 }
 
@@ -266,4 +272,30 @@ button img {
 
 #fleet-deployment-screen {
     background-image: url('assets/images/single-player-fleet-deployment-background.png');
+}
+
+#shuffle-button {
+    position: absolute;
+    top: calc(69 / var(--background-sprite-height) * 100%);
+    left: calc(328 / var(--background-sprite-width) * 100%);
+    width: var(--shuffle-button-width);
+    height: auto;
+}
+
+#ready-button {
+    position: absolute;
+    top: calc(131 / var(--background-sprite-height) * 100%);
+    left: calc(320 / var(--background-sprite-width) * 100%);
+    width: var(--ready-button-width);
+    height: auto;
+}
+
+/* Hover state for the Ready button */
+#ready-button:hover img {
+    content: url('assets/sprites/buttons/hover/ready-button-hover.png');
+}
+
+/* Hover state for the Shuffle button */
+#shuffle-button:hover img {
+    content: url('assets/sprites/buttons/hover/shuffle-button-hover.png');
 }
