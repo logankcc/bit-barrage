@@ -13,7 +13,9 @@ export class SelectGameModeScreen extends Screen {
     initListeners(): void {
         this.initButtonListener(document.getElementById('single-player-button'));
         this.initButtonListener(document.getElementById('multi-player-button'), 'Multiplayer button pressed!');
-        this.initInstructionsButtonListener();
         this.initBackButtonListener();
+        this.initInstructionsButtonListener();
+        this.initMusicButtonListener();
+        this.initSoundButtonListener();
     }
 }

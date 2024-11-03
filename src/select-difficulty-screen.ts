@@ -11,9 +11,10 @@ export class SelectDifficultyScreen extends Screen {
     }
 
     initListeners(): void {
-        this.initButtonListener(document.getElementById('easy-button'), 'Easy button pressed!');
-        this.initButtonListener(document.getElementById('hard-button'), 'Hard button pressed!');
-        this.initInstructionsButtonListener();
+        this.initButtonListener(document.getElementById('easy-button'));
+        this.initButtonListener(document.getElementById('hard-button'));
         this.initBackButtonListener()
+        this.initMusicButtonListener();
+        this.initSoundButtonListener();
     }
 }

@@ -2,14 +2,17 @@
 // Defines the abstract Screen class as a base for all screens in the game.
 // ------------------------------------------------------------------------------------------------
 
-import { ButtonClass, DataAttribute, ScreenID, HTMLElementOrNull } from './constants.js';
+// TODO: Clean up imports.
+import { MusicSetting, SoundSetting, ButtonID, ButtonClass, DataAttribute, ScreenID, HTMLElementOrNull } from './constants.js';
 import { ScreenElement } from './screen-elements.js';
-// import { warnElementNull } from './utility.js'
+import { GameState } from './game-state.js';
+import { warnElementNull } from './utility.js'
 
 export abstract class Screen {
     protected screenID: ScreenID;
     protected screenElement: HTMLElementOrNull;
-    static previousElement: HTMLElementOrNull = ScreenElement.home;
+    static previousElement: HTMLElementOrNull = null;
+    static gameState: GameState = new GameState();
 
     constructor(screenID: ScreenID) {
         this.screenID = screenID;
@@ -26,6 +29,8 @@ export abstract class Screen {
                 return ScreenElement.selectGameMode;
             case ScreenID.SELECT_DIFFICULTY:
                 return ScreenElement.selectDifficulty;
+            case ScreenID.FLEET_DEPLOYMENT:
+                return ScreenElement.fleetDeployment;
             default:
                 console.warn(`Unknown screen ID: ${screenID}!`);
                 return null;
@@ -55,7 +60,18 @@ export abstract class Screen {
         } else if (buttonElement) {
             const nextScreenAttribute = buttonElement.getAttribute(DataAttribute.NEXT_SCREEN);
             const nextScreenElement = nextScreenAttribute ? document.getElementById(nextScreenAttribute) : null;
-            buttonElement.addEventListener('click', () => this.changeScreen(nextScreenElement));
+            if (buttonElement.id == ButtonID.PLAY_BUTTON) {
+                // TODO: Uncomment for music to auto-play when the Play button is clicked.
+                /*
+                buttonElement.addEventListener('click', () => {
+                    this.changeScreen(nextScreenElement);
+                    Screen.gameState.playMusic();
+                });
+                */
+                buttonElement.addEventListener('click', () => this.changeScreen(nextScreenElement));
+            } else {
+                buttonElement.addEventListener('click', () => this.changeScreen(nextScreenElement));
+            }
         } else {
             console.warn("Element is null!");
         }
@@ -89,6 +105,60 @@ export abstract class Screen {
             }
         } else {
             console.warn("Back Button element is null!");
+        }
+    }
+
+    private toggleMusicButton(): void {
+        const musicSetting: MusicSetting = Screen.gameState.getMusicSetting();
+        const musicButtonElementList = document.querySelectorAll(ButtonClass.MUSIC_BUTTON);
+
+        musicButtonElementList.forEach(musicButtonElement => {
+            if (musicSetting == MusicSetting.ON) {
+                musicButtonElement.classList.add(MusicSetting.OFF);
+                musicButtonElement.classList.remove(MusicSetting.ON);
+            } else {
+                musicButtonElement.classList.add(MusicSetting.ON);
+                musicButtonElement.classList.remove(MusicSetting.OFF);
+            }
+        });
+
+        Screen.gameState.toggleMusicSetting();
+    }
+
+    protected initMusicButtonListener(): void {
+        const musicButtonElement = this.screenElement ? this.screenElement.querySelector(ButtonClass.MUSIC_BUTTON) : null;
+        if (musicButtonElement) {
+            musicButtonElement.addEventListener('click', () => this.toggleMusicButton());
+        } else {
+            warnElementNull(ButtonClass.MUSIC_BUTTON);
+        }
+    }
+
+    private toggleSoundButton(): void {
+        const soundSetting: SoundSetting = Screen.gameState.getSoundSetting();
+        const soundButtonElementList = document.querySelectorAll(ButtonClass.SOUND_BUTTON);
+
+        soundButtonElementList.forEach(soundButtonElement => {
+            if (soundSetting == SoundSetting.ON) {
+                console.log("Sound off!");
+                soundButtonElement.classList.add(SoundSetting.OFF);
+                soundButtonElement.classList.remove(SoundSetting.ON);
+            } else {
+                console.log("Sound on!");
+                soundButtonElement.classList.add(SoundSetting.ON);
+                soundButtonElement.classList.remove(SoundSetting.OFF);
+            }
+        });
+
+        Screen.gameState.toggleSoundSetting();
+    }
+
+    protected initSoundButtonListener(): void {
+        const soundButtonElement = this.screenElement ? this.screenElement.querySelector(ButtonClass.SOUND_BUTTON) : null;
+        if (soundButtonElement) {
+            soundButtonElement.addEventListener('click', () => this.toggleSoundButton());
+        } else {
+            warnElementNull(ButtonClass.SOUND_BUTTON);
         }
     }
 }

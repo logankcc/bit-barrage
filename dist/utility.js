@@ -2,5 +2,5 @@
 // Common utility functions.
 // ------------------------------------------------------------------------------------------------
 export function warnElementNull(elementName) {
-    console.warn(`${elementName} is null!`);
+    console.warn(`${elementName} element is null!`);
 }

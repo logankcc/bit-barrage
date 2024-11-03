@@ -7,9 +7,10 @@ export class SelectDifficultyScreen extends Screen {
         super("select-difficulty-screen" /* ScreenID.SELECT_DIFFICULTY */);
     }
     initListeners() {
-        this.initButtonListener(document.getElementById('easy-button'), 'Easy button pressed!');
-        this.initButtonListener(document.getElementById('hard-button'), 'Hard button pressed!');
-        this.initInstructionsButtonListener();
+        this.initButtonListener(document.getElementById('easy-button'));
+        this.initButtonListener(document.getElementById('hard-button'));
         this.initBackButtonListener();
+        this.initMusicButtonListener();
+        this.initSoundButtonListener();
     }
 }

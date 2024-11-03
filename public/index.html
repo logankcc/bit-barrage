@@ -10,12 +10,14 @@
 
     <!-- Preload background images -->
     <link rel="preload" href="assets/images/default-background.png" as="image">
+    <link rel="preload" href="assets/images/instructions-background.png" as="image">
     <link rel="preload" href="assets/images/select-game-mode-background.png" as="image">
     <link rel="preload" href="assets/images/select-difficulty-background.png" as="image">
-    <link rel="preload" href="assets/images/instructions-background.png" as="image">
+    <link rel="preload" href="assets/images/single-player-fleet-deployment-background.png" as="image">
 </head>
 
 <body>
+    <!-- TODO: Change "music-off" to "music-on" for music to auto-play when the Play button is clicked. -->
     <!-- Game Container -->
     <div id="game-container">
         <!-- Home Screen -->
@@ -26,7 +28,7 @@
         </div>
         <!-- Instructions Screen -->
         <div id="instructions-screen" class="screen">
-            <button class="back-button" type="button">
+            <button class="back-button top-right-2" type="button">
                 <img src="assets/sprites/buttons/idle/back-button-idle.png">
             </button>
         </div>
@@ -38,26 +40,49 @@
             <button id="multi-player-button" type="button">
                 <img src="assets/sprites/buttons/idle/multi-player-button-idle.png">
             </button>
-            <button class="back-button" type="button">
+            <button class="back-button top-right-1" type="button">
                 <img src="assets/sprites/buttons/idle/back-button-idle.png">
             </button>
-            <button class="instructions-button" data-next-screen="instructions-screen" type="button">
+            <button class="instructions-button top-right-2" data-next-screen="instructions-screen" type="button">
                 <img src="assets/sprites/buttons/idle/instructions-button-idle.png">
+            </button>
+            <button class="music-button music-off bottom-right-1" type="button">
+                <img src="assets/sprites/buttons/idle/music-off-button-idle.png">
+            </button>
+            <button class="sound-button sound-on bottom-right-2" type="button">
+                <img src="assets/sprites/buttons/idle/sound-on-button-idle.png">
             </button>
         </div>
         <!-- Select Difficulty Screen -->
         <div id="select-difficulty-screen" class="screen">
-            <button id="easy-button" type="button">
+            <button id="easy-button" data-next-screen="fleet-deployment-screen" type="button">
                 <img src="assets/sprites/buttons/idle/easy-button-idle.png">
             </button>
-            <button id="hard-button" type="button">
+            <button id="hard-button" data-next-screen="fleet-deployment-screen" type="button">
                 <img src="assets/sprites/buttons/idle/hard-button-idle.png">
             </button>
-            <button class="back-button" type="button">
+            <button class="back-button top-right-1" type="button">
                 <img src="assets/sprites/buttons/idle/back-button-idle.png">
             </button>
-            <button class="instructions-button" data-next-screen="instructions-screen" type="button">
+            <button class="instructions-button top-right-2" data-next-screen="instructions-screen" type="button">
                 <img src="assets/sprites/buttons/idle/instructions-button-idle.png">
+            </button>
+            <button class="music-button music-off bottom-right-1" type="button">
+                <img src="assets/sprites/buttons/idle/music-off-button-idle.png">
+            </button>
+            <button class="sound-button sound-on bottom-right-2" type="button">
+                <img src="assets/sprites/buttons/idle/sound-on-button-idle.png">
+            </button>
+        </div>
+        <!-- Fleet Deployment Screen -->
+        <div id="fleet-deployment-screen" class="screen">
+            <button class="instructions-button top-right-2" data-next-screen="instructions-screen" type="button">
+            </button>
+            <button class="music-button music-off bottom-right-1" type="button">
+                <img src="assets/sprites/buttons/idle/music-off-button-idle.png">
+            </button>
+            <button class="sound-button sound-on bottom-right-2" type="button">
+                <img src="assets/sprites/buttons/idle/sound-on-button-idle.png">
             </button>
         </div>
     </div>

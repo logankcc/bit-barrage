@@ -3,5 +3,5 @@
 // ------------------------------------------------------------------------------------------------
 
 export function warnElementNull(elementName: string): void {
-    console.warn(`${elementName} is null!`);
+    console.warn(`${elementName} element is null!`);
 }

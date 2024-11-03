@@ -34,10 +34,10 @@ body {
 
 /* Button styles*/
 button {
+    padding: 0;
     border: none;
     background: none;
     cursor: pointer;
-    padding: 0;
 }
 
 /* Button image styles */
@@ -66,7 +66,8 @@ button img {
     Reusable Component Styles
    --------------------------------------------------------------------------------------------- */
 
-.screen, .instructions-screen {
+.screen,
+.instructions-screen {
     display: none;
     justify-content: center;
     align-items: center;
@@ -78,15 +79,8 @@ button img {
     image-rendering: pixelated;
 }
 
-.back-button {
-    position: absolute;
-    top: calc(12 / var(--background-sprite-height) * 100%);
-    left: calc(352 / var(--background-sprite-width) * 100%);
-    width: var(--small-button-width);
-    height: auto;
-}
-
-.instructions-button {
+/* Top Right Button Positions */
+.top-right-1 {
     position: absolute;
     top: calc(12 / var(--background-sprite-height) * 100%);
     left: calc(320 / var(--background-sprite-width) * 100%);
@@ -94,13 +88,74 @@ button img {
     height: auto;
 }
 
+.top-right-2 {
+    position: absolute;
+    top: calc(12 / var(--background-sprite-height) * 100%);
+    left: calc(352 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+/* Bottom Right Button Positions */
+.bottom-right-1 {
+    position: absolute;
+    top: calc(188 / var(--background-sprite-height) * 100%);
+    left: calc(320 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+.bottom-right-2 {
+    position: absolute;
+    top: calc(188 / var(--background-sprite-height) * 100%);
+    left: calc(352 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+/* Back & Instructions Buttons */
 .back-button:hover img {
     content: url('assets/sprites/buttons/hover/back-button-hover.png');
 }
 
 .instructions-button:hover img {
-    content: url('assets/sprites/buttons/hover/instructions-button-hover.png');
+    content: url('assets/sprites/buttons/hover/instructions-button-hover.png')
 }
+
+/* Music Buttons */
+.music-button.music-on img {
+    content: url('assets/sprites/buttons/idle/music-on-button-idle.png');
+}
+
+.music-button.music-off img {
+    content: url('assets/sprites/buttons/idle/music-off-button-idle.png');
+}
+
+.music-button.music-on:hover  img {
+    content: url('assets/sprites/buttons/hover/music-on-button-hover.png');
+}
+
+.music-button.music-off:hover  img {
+    content: url('assets/sprites/buttons/hover/music-off-button-hover.png');
+}
+
+/* Sound Buttons */
+.sound-button.sound-on img {
+    content: url('assets/sprites/buttons/idle/sound-on-button-idle.png');
+}
+
+.sound-button.sound-off img {
+    content: url('assets/sprites/buttons/idle/sound-off-button-idle.png');
+}
+
+.sound-button.sound-on:hover  img {
+    content: url('assets/sprites/buttons/hover/sound-on-button-hover.png');
+}
+
+.sound-button.sound-off:hover  img {
+    content: url('assets/sprites/buttons/hover/sound-off-button-hover.png');
+}
+
 
 /* ---------------------------------------------------------------------------------------------
     Home Screen Styles
@@ -204,4 +259,12 @@ button img {
 /* Hover state for the Hard button */
 #hard-button:hover img {
     content: url('assets/sprites/buttons/hover/hard-button-hover.png');
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Fleet Deployment Screen Styles
+   --------------------------------------------------------------------------------------------- */
+
+#fleet-deployment-screen {
+    background-image: url('assets/images/single-player-fleet-deployment-background.png');
 }
