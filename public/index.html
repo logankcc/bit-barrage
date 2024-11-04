@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bit Barrage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Preload background images -->
+    <link rel="preload" href="assets/images/default-background.png" as="image">
+    <link rel="preload" href="assets/images/instructions-background.png" as="image">
+    <link rel="preload" href="assets/images/select-game-mode-background.png" as="image">
+    <link rel="preload" href="assets/images/select-difficulty-background.png" as="image">
+    <link rel="preload" href="assets/images/single-player-fleet-deployment-background.png" as="image">
+</head>
+
+<body>
+    <!-- TODO: Change "music-off" to "music-on" for music to auto-play when the Play button is clicked. -->
+    <!-- Game Container -->
+    <div id="game-container">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen">
+            <button id="play-button" data-next-screen="select-game-mode-screen" type="button">
+                <img src="assets/sprites/buttons/idle/play-button-idle.png">
+            </button>
+        </div>
+        <!-- Instructions Screen -->
+        <div id="instructions-screen" class="screen">
+            <button class="back-button top-right-2" type="button">
+                <img src="assets/sprites/buttons/idle/back-button-idle.png">
+            </button>
+        </div>
+        <!-- Select Game Mode Screen -->
+        <div id="select-game-mode-screen" class="screen">
+            <button id="single-player-button" data-next-screen="select-difficulty-screen" type="button">
+                <img src="assets/sprites/buttons/idle/single-player-button-idle.png">
+            </button>
+            <button id="multi-player-button" type="button">
+                <img src="assets/sprites/buttons/idle/multi-player-button-idle.png">
+            </button>
+            <button class="back-button top-right-1" type="button">
+                <img src="assets/sprites/buttons/idle/back-button-idle.png">
+            </button>
+            <button class="instructions-button top-right-2" data-next-screen="instructions-screen" type="button">
+                <img src="assets/sprites/buttons/idle/instructions-button-idle.png">
+            </button>
+            <button class="music-button music-off bottom-right-1" type="button">
+                <img src="assets/sprites/buttons/idle/music-off-button-idle.png">
+            </button>
+            <button class="sound-button sound-on bottom-right-2" type="button">
+                <img src="assets/sprites/buttons/idle/sound-on-button-idle.png">
+            </button>
+        </div>
+        <!-- Select Difficulty Screen -->
+        <div id="select-difficulty-screen" class="screen">
+            <button id="easy-button" data-next-screen="fleet-deployment-screen" type="button">
+                <img src="assets/sprites/buttons/idle/easy-button-idle.png">
+            </button>
+            <button id="hard-button" data-next-screen="fleet-deployment-screen" type="button">
+                <img src="assets/sprites/buttons/idle/hard-button-idle.png">
+            </button>
+            <button class="back-button top-right-1" type="button">
+                <img src="assets/sprites/buttons/idle/back-button-idle.png">
+            </button>
+            <button class="instructions-button top-right-2" data-next-screen="instructions-screen" type="button">
+                <img src="assets/sprites/buttons/idle/instructions-button-idle.png">
+            </button>
+            <button class="music-button music-off bottom-right-1" type="button">
+                <img src="assets/sprites/buttons/idle/music-off-button-idle.png">
+            </button>
+            <button class="sound-button sound-on bottom-right-2" type="button">
+                <img src="assets/sprites/buttons/idle/sound-on-button-idle.png">
+            </button>
+        </div>
+        <!-- Fleet Deployment Screen -->
+        <div id="fleet-deployment-screen" class="screen">
+            <button id="ready-button" data-next-screen="gameplay-screen" type="button">
+                <img src="assets/sprites/buttons/idle/ready-button-idle.png">
+            </button>
+            <button id="shuffle-button" type="button">
+                <img src="assets/sprites/buttons/idle/shuffle-button-idle.png">
+            </button>
+            <button class="instructions-button top-right-2" data-next-screen="instructions-screen" type="button">
+                <img src="assets/sprites/buttons/idle/instructions-button-idle.png">
+            </button>
+            <button class="music-button music-off bottom-right-1" type="button">
+                <img src="assets/sprites/buttons/idle/music-off-button-idle.png">
+            </button>
+            <button class="sound-button sound-on bottom-right-2" type="button">
+                <img src="assets/sprites/buttons/idle/sound-on-button-idle.png">
+            </button>
+        </div>
+    </div>
+
+    <script type="module" src="../dist/main.js"></script>
+</body>
+
+</html>

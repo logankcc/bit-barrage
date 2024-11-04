@@ -1,0 +1,301 @@
+/* ---------------------------------------------------------------------------------------------
+   CSS Variables
+   --------------------------------------------------------------------------------------------- */
+
+:root {
+    /* Colors */
+    --background-color: white;
+
+    /* Dimensions */
+    --container-width: 80vw;
+    --background-sprite-width: 384;
+    --background-sprite-height: 216;
+
+    /* Aspect Ratios */
+    --aspect-ratio-width: 16;
+    --aspect-ratio-height: 9;
+
+    /* Button Widths */
+    --small-button-width: calc(16 / var(--background-sprite-width) * 100%);
+    --medium-button-width: calc(64 / var(--background-sprite-width) * 100%);
+    --large-button-width: calc(96 / var(--background-sprite-width) * 100%);
+    --shuffle-button-width: calc(32 / var(--background-sprite-width) * 100%);
+    --ready-button-width: calc(48 / var(--background-sprite-width) * 100%);
+}
+
+/* ---------------------------------------------------------------------------------------------
+    Global Styles
+   --------------------------------------------------------------------------------------------- */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    overflow: hidden;
+}
+
+/* Button styles*/
+button {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Button image styles */
+button img {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+}
+
+/* ---------------------------------------------------------------------------------------------
+    Game Container Styles
+   --------------------------------------------------------------------------------------------- */
+
+#game-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--container-width);
+    height: calc(var(--container-width) * var(--aspect-ratio-height) / var(--aspect-ratio-width));
+    background-color: var(--background-color);
+    overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------------------------------
+    Reusable Component Styles
+   --------------------------------------------------------------------------------------------- */
+
+.screen,
+.instructions-screen {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+
+/* Top Right Button Positions */
+.top-right-1 {
+    position: absolute;
+    top: calc(12 / var(--background-sprite-height) * 100%);
+    left: calc(320 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+.top-right-2 {
+    position: absolute;
+    top: calc(12 / var(--background-sprite-height) * 100%);
+    left: calc(352 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+/* Bottom Right Button Positions */
+.bottom-right-1 {
+    position: absolute;
+    top: calc(188 / var(--background-sprite-height) * 100%);
+    left: calc(320 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+.bottom-right-2 {
+    position: absolute;
+    top: calc(188 / var(--background-sprite-height) * 100%);
+    left: calc(352 / var(--background-sprite-width) * 100%);
+    width: var(--small-button-width);
+    height: auto;
+}
+
+/* Back & Instructions Buttons */
+.back-button:hover img {
+    content: url('assets/sprites/buttons/hover/back-button-hover.png');
+}
+
+.instructions-button:hover img {
+    content: url('assets/sprites/buttons/hover/instructions-button-hover.png')
+}
+
+/* Music Buttons */
+.music-button.music-on img {
+    content: url('assets/sprites/buttons/idle/music-on-button-idle.png');
+}
+
+.music-button.music-off img {
+    content: url('assets/sprites/buttons/idle/music-off-button-idle.png');
+}
+
+/* Hover state for the Music-On button */
+.music-button.music-on:hover img {
+    content: url('assets/sprites/buttons/hover/music-on-button-hover.png');
+}
+
+/* Hover state for the Music-Off button */
+.music-button.music-off:hover img {
+    content: url('assets/sprites/buttons/hover/music-off-button-hover.png');
+}
+
+/* Sound Buttons */
+.sound-button.sound-on img {
+    content: url('assets/sprites/buttons/idle/sound-on-button-idle.png');
+}
+
+.sound-button.sound-off img {
+    content: url('assets/sprites/buttons/idle/sound-off-button-idle.png');
+}
+
+/* Hover state for the Sound-On button */
+.sound-button.sound-on:hover img {
+    content: url('assets/sprites/buttons/hover/sound-on-button-hover.png');
+}
+
+/* Hover state for the Sound-Off button */
+.sound-button.sound-off:hover img {
+    content: url('assets/sprites/buttons/hover/sound-off-button-hover.png');
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+    Home Screen Styles
+   --------------------------------------------------------------------------------------------- */
+
+#home-screen {
+    display: flex;
+    background-image: url('assets/images/home-background.png');
+}
+
+/* Position the Play button */
+#play-button {
+    position: absolute;
+    top: calc(144 / var(--background-sprite-height) * 100%);
+    left: calc(160 / var(--background-sprite-width) * 100%);
+    width: var(--medium-button-width);
+    height: auto;
+}
+
+/* Hover state for the Play button */
+#play-button:hover img {
+    content: url('assets/sprites/buttons/hover/play-button-hover.png');
+}
+
+/* ---------------------------------------------------------------------------------------------
+    Instructions Screen Styles
+   --------------------------------------------------------------------------------------------- */
+
+#instructions-screen {
+    background-image: url('assets/images/instructions-background.png');
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Select Game Mode Screen Styles
+   --------------------------------------------------------------------------------------------- */
+
+#select-game-mode-screen {
+    background-image: url('assets/images/select-game-mode-background.png');
+}
+
+/* Position the Single Player button */
+#single-player-button {
+    position: absolute;
+    top: calc(92 / var(--background-sprite-height) * 100%);
+    left: calc(88 / var(--background-sprite-width) * 100%);
+    width: var(--large-button-width);
+    height: auto;
+}
+
+/* Position the Multiplayer button */
+#multi-player-button {
+    position: absolute;
+    top: calc(92 / var(--background-sprite-height) * 100%);
+    left: calc(200 / var(--background-sprite-width) * 100%);
+    width: var(--large-button-width);
+    height: auto;
+}
+
+/* Hover state for the Single Player button */
+#single-player-button:hover img {
+    content: url('assets/sprites/buttons/hover/single-player-button-hover.png');
+}
+
+/* Hover state for the Multiplayer button */
+#multi-player-button:hover img {
+    content: url('assets/sprites/buttons/hover/multi-player-button-hover.png');
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Select Difficulty Screen Styles
+   --------------------------------------------------------------------------------------------- */
+
+#select-difficulty-screen {
+    background-image: url('assets/images/select-difficulty-background.png');
+}
+
+/* Position the Easy button */
+#easy-button {
+    position: absolute;
+    top: calc(92 / var(--background-sprite-height) * 100%);
+    left: calc(88 / var(--background-sprite-width) * 100%);
+    width: var(--large-button-width);
+    height: auto;
+}
+
+/* Position the Hard button */
+#hard-button {
+    position: absolute;
+    top: calc(92 / var(--background-sprite-height) * 100%);
+    left: calc(200 / var(--background-sprite-width) * 100%);
+    width: var(--large-button-width);
+    height: auto;
+}
+
+/* Hover state for the Easy button */
+#easy-button:hover img {
+    content: url('assets/sprites/buttons/hover/easy-button-hover.png');
+}
+
+/* Hover state for the Hard button */
+#hard-button:hover img {
+    content: url('assets/sprites/buttons/hover/hard-button-hover.png');
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Fleet Deployment Screen Styles
+   --------------------------------------------------------------------------------------------- */
+
+#fleet-deployment-screen {
+    background-image: url('assets/images/single-player-fleet-deployment-background.png');
+}
+
+#shuffle-button {
+    position: absolute;
+    top: calc(69 / var(--background-sprite-height) * 100%);
+    left: calc(328 / var(--background-sprite-width) * 100%);
+    width: var(--shuffle-button-width);
+    height: auto;
+}
+
+#ready-button {
+    position: absolute;
+    top: calc(131 / var(--background-sprite-height) * 100%);
+    left: calc(320 / var(--background-sprite-width) * 100%);
+    width: var(--ready-button-width);
+    height: auto;
+}
+
+/* Hover state for the Ready button */
+#ready-button:hover img {
+    content: url('assets/sprites/buttons/hover/ready-button-hover.png');
+}
+
+/* Hover state for the Shuffle button */
+#shuffle-button:hover img {
+    content: url('assets/sprites/buttons/hover/shuffle-button-hover.png');
+}
