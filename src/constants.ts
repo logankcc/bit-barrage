@@ -14,7 +14,8 @@ export const enum ScreenID {
 }
 
 export const enum ButtonID {
-    PLAY_BUTTON = 'play-button'
+    PLAY_BUTTON = 'play-button',
+    READY_BUTTON = 'ready-button'
 }
 
 export const enum ButtonClass {

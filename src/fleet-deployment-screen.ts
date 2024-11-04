@@ -5,6 +5,7 @@
 import { ScreenID, HTMLElementOrNull } from './constants.js';
 import { Screen } from './screen.js';
 import { warnElementNull } from './utility.js';
+import { GameState } from './game-state.js';
 
 export class FleetDeploymentScreen extends Screen {
     constructor() {
@@ -13,7 +14,7 @@ export class FleetDeploymentScreen extends Screen {
 
     initListeners(): void {
         this.initShuffleButton(document.getElementById('shuffle-button'));
-        this.initButtonListener(document.getElementById('ready-button'), 'Ready button pressed!');
+        this.initButtonListener(document.getElementById('ready-button'));
         this.initInstructionsButtonListener();
         this.initMusicButtonListener();
         this.initSoundButtonListener();
@@ -21,7 +22,10 @@ export class FleetDeploymentScreen extends Screen {
 
     protected initShuffleButton(buttonElement: HTMLElementOrNull): void {
         if (buttonElement) {
-            buttonElement.addEventListener('click', () => console.log('Shuffle button pressed!'));
+            buttonElement.addEventListener('click', () => {
+                console.log('Shuffle button pressed!');
+                GameState.playerOneGameBoard.shuffleShips();
+            });
         } else {
             warnElementNull('shuffle-button');
         }

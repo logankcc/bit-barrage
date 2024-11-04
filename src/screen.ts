@@ -69,6 +69,9 @@ export abstract class Screen {
                 });
                 */
                 buttonElement.addEventListener('click', () => this.changeScreen(nextScreenElement));
+            } else if (buttonElement.id == ButtonID.READY_BUTTON) {
+                // TODO: Remove this test block.
+                buttonElement.addEventListener('click', () => GameState.playerOneGameBoard.printBoard());
             } else {
                 buttonElement.addEventListener('click', () => this.changeScreen(nextScreenElement));
             }
