@@ -2,8 +2,8 @@
 // Defines the FleetDeploymentScreen class used to represent the Fleet Deployment screen in game.
 // ------------------------------------------------------------------------------------------------
 import { Screen } from './screen.js';
+import { GameManager } from './game-manager.js';
 import { warnElementNull } from './utility.js';
-import { GameState } from './game-state.js';
 export class FleetDeploymentScreen extends Screen {
     constructor() {
         super("fleet-deployment-screen" /* ScreenID.FLEET_DEPLOYMENT */);
@@ -19,7 +19,7 @@ export class FleetDeploymentScreen extends Screen {
         if (buttonElement) {
             buttonElement.addEventListener('click', () => {
                 console.log('Shuffle button pressed!');
-                GameState.playerOneGameBoard.shuffleShips();
+                GameManager.playerOneGameBoard.shuffleShips();
             });
         }
         else {
