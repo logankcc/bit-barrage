@@ -1,5 +1,5 @@
 // screen-elements.ts --------------------------------------------------------------------------------------
-// Stores references to main screen elements for easy access.
+// Stores references to screen elements for easy access.
 // ------------------------------------------------------------------------------------------------
 
 import { ScreenID } from './constants.js';

@@ -2,85 +2,48 @@
 // Defines the GameBoard class to represent and track the state of each player's game board.
 // ------------------------------------------------------------------------------------------------
 
-// TODO: Consider moving enums, types, and maps to a separate constants file.
-const enum Orientation {
-    HORIZONTAL,
-    VERTICAL
-}
-
-const enum ShipName {
-    BATTLESHIP = 'battleship',
-    AIRCRAFT_CARRIER = 'aircraft-carrier',
-    DESTROYER = 'destroyer',
-    SUBMARINE = 'submarine',
-    PATROL_BOAT = 'patrol-boat',
-    ROW_BOAT = 'row-boat'
-};
-
-const ShipLength: Map<ShipName, number> = new Map([
-    [ShipName.BATTLESHIP, 6],
-    [ShipName.AIRCRAFT_CARRIER, 5],
-    [ShipName.DESTROYER, 4],
-    [ShipName.SUBMARINE, 3],
-    [ShipName.PATROL_BOAT, 2],
-    [ShipName.ROW_BOAT, 1],
-]);
-
-type Board = BoardTile[][];
-
-type Coordinate = [number, number];
-
-const BOARD_SIZE: number = 10
-
-const enum BoardTile {
-    WATER,
-    SHIP,
-    HIT_WATER,
-    HIT_SHIP
-}
+import * as Constants from './constants.js';
 
 export class GameBoard {
-    private board: Board = this.initBoard();
+    private board: Constants.Board = this.initBoard();
+    private shipPositions: Map<Constants.ShipName, Constants.Coordinate[]> = new Map();
 
-    constructor() {
-    }
-
-    private initBoard(): BoardTile[][] {
-        return Array.from({ length: BOARD_SIZE }, () =>
-            Array(BOARD_SIZE).fill(BoardTile.WATER)
+    private initBoard(): Constants.BoardTile[][] {
+        return Array.from({ length: Constants.BOARD_SIZE }, () =>
+            Array(Constants.BOARD_SIZE).fill(Constants.BoardTile.WATER)
         );
     }
 
-    private getRandomOrientation(): Orientation {
-        return Math.random() < 0.5 ? Orientation.HORIZONTAL : Orientation.VERTICAL;
+    private getRandomOrientation(): Constants.Orientation {
+        return Math.random() < 0.5 ? Constants.Orientation.HORIZONTAL : Constants.Orientation.VERTICAL;
     }
 
-    private getRandomStartingCoordinate(shipLength: number, orientation: Orientation): Coordinate {
-        if (orientation == Orientation.HORIZONTAL) {
-            const row = Math.floor(Math.random() * BOARD_SIZE);
-            const col = Math.floor(Math.random() * (BOARD_SIZE - shipLength));
+    private getRandomStartingCoordinate(shipLength: number, orientation: Constants.Orientation): Constants.Coordinate {
+        if (orientation == Constants.Orientation.HORIZONTAL) {
+            const row = Math.floor(Math.random() * Constants.BOARD_SIZE);
+            const col = Math.floor(Math.random() * (Constants.BOARD_SIZE - shipLength));
             return [row, col]
         } else {
-            const row = Math.floor(Math.random() * (BOARD_SIZE - shipLength));
-            const col = Math.floor(Math.random() * BOARD_SIZE);
+            const row = Math.floor(Math.random() * (Constants.BOARD_SIZE - shipLength));
+            const col = Math.floor(Math.random() * Constants.BOARD_SIZE);
             return [row, col]
         }
     }
 
-    private getRandomShipCoordinates(shipLength: number, orientation: Orientation): Coordinate[] {
+    private getRandomShipCoordinates(shipLength: number, orientation: Constants.Orientation): Constants.Coordinate[] {
         const startingCoordinate = this.getRandomStartingCoordinate(shipLength, orientation);
-        const shipCoordinates: Coordinate[] = [startingCoordinate];
+        const shipCoordinates: Constants.Coordinate[] = [startingCoordinate];
 
         for (let i = 1; i < shipLength; i++) {
-            if (orientation == Orientation.HORIZONTAL) {
+            if (orientation == Constants.Orientation.HORIZONTAL) {
                 const row = startingCoordinate[0];
                 const col = startingCoordinate[1] + i;
-                const nextCoordinate: Coordinate = [row, col];
+                const nextCoordinate: Constants.Coordinate = [row, col];
                 shipCoordinates.push(nextCoordinate);
             } else {
                 const row = startingCoordinate[0] + i;
                 const col = startingCoordinate[1];
-                const nextCoordinate: Coordinate = [row, col];
+                const nextCoordinate: Constants.Coordinate = [row, col];
                 shipCoordinates.push(nextCoordinate);
             }
         }
@@ -88,44 +51,49 @@ export class GameBoard {
         return shipCoordinates
     }
 
-    private isValidCoordinates(shipCoordinates: Coordinate[]): boolean {
+    private isValidCoordinates(shipCoordinates: Constants.Coordinate[]): boolean {
         for (const [row, col] of shipCoordinates) {
-            if (this.board[row][col] != BoardTile.WATER)
+            if (this.board[row][col] != Constants.BoardTile.WATER)
                 return false;
         }
         return true
     }
 
-    private placeShipOnBoard(shipCoordinates: Coordinate[]): void {
+    private placeShipOnBoard(shipCoordinates: Constants.Coordinate[]): void {
         for (const [row, col] of shipCoordinates) {
-            this.board[row][col] = BoardTile.SHIP;
+            this.board[row][col] = Constants.BoardTile.SHIP;
         }
     }
 
     public shuffleShips(): void {
-        // TODO: Only clear ship positions.
         // Reset the game board
-        this.board = this.initBoard();
+        for (const shipCoordinates of this.shipPositions.values()) {
+            for (const [row, col] of shipCoordinates) {
+                this.board[row][col] = Constants.BoardTile.WATER
+            }
+        }
 
         // Place each ship from largest to smallest 
-        for (const shipLength of ShipLength.values()) {
-            let shipCoordinates: Coordinate[];
+        for (const [shipName, shipLength] of Constants.ShipLength.entries()) {
+            let shipCoordinates: Constants.Coordinate[];
             let isValidPlacement = false;
 
             // Loop until valid coordinates are found
             do {
-                const shipOrientation: Orientation = this.getRandomOrientation();
+                const shipOrientation: Constants.Orientation = this.getRandomOrientation();
                 shipCoordinates = this.getRandomShipCoordinates(shipLength, shipOrientation)
                 isValidPlacement = this.isValidCoordinates(shipCoordinates)
             } while (!isValidPlacement);
 
+            // Save the position of the ship
+            this.shipPositions.set(shipName, shipCoordinates)
             // Place the current ship on the board
             this.placeShipOnBoard(shipCoordinates);
         }
     }
 
     public printBoard(): void {
-        const boardString = this.board.map(row => row.map(boardTile => (boardTile == BoardTile.WATER ? 'O' : 'X')).join(' ')).join('\n');
+        const boardString = this.board.map(row => row.map(boardTile => (boardTile == Constants.BoardTile.WATER ? 'O' : 'X')).join(' ')).join('\n');
         console.log(boardString);
     }
 }

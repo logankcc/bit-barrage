@@ -6,7 +6,7 @@ export class GameAudio {
     protected backgroundMusic: HTMLAudioElement;
 
     constructor() {
-        this.backgroundMusic = new Audio("assets/audio/background-music.mp3");
+        this.backgroundMusic = new Audio('assets/audio/background-music.mp3');
         this.backgroundMusic.loop = true;
         this.backgroundMusic.volume = 0.25;
     }
@@ -17,7 +17,7 @@ export class GameAudio {
 
     public playMusic(): void {
         if (this.isPaused()) {
-            this.backgroundMusic.play().catch(error => console.error("Error playing music:", error));
+            this.backgroundMusic.play().catch(error => console.error('Error playing music: ', error));
         }
     }
 
@@ -27,7 +27,7 @@ export class GameAudio {
         }
     }
 
-    public toggleMusic() {
+    public toggleMusic(): void {
         if (!this.isPaused()) {
             this.pauseMusic();
         } else {

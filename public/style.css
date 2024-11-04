@@ -81,6 +81,17 @@ button img {
     image-rendering: pixelated;
 }
 
+.game-board {
+    position: absolute;
+    top: calc((27 / var(--background-sprite-height)) * 100%);
+    left: calc((127 / var(--background-sprite-width)) * 100%);
+    width: calc((161 / var(--background-sprite-width)) * 100%);
+    height: calc((161 / var(--background-sprite-height)) * 100%);
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
 /* Top Right Button Positions */
 .top-right-1 {
     position: absolute;

@@ -4,7 +4,7 @@
 export class GameAudio {
     backgroundMusic;
     constructor() {
-        this.backgroundMusic = new Audio("assets/audio/background-music.mp3");
+        this.backgroundMusic = new Audio('assets/audio/background-music.mp3');
         this.backgroundMusic.loop = true;
         this.backgroundMusic.volume = 0.25;
     }
@@ -13,7 +13,7 @@ export class GameAudio {
     }
     playMusic() {
         if (this.isPaused()) {
-            this.backgroundMusic.play().catch(error => console.error("Error playing music:", error));
+            this.backgroundMusic.play().catch(error => console.error('Error playing music: ', error));
         }
     }
     pauseMusic() {

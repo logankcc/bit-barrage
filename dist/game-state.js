@@ -1,47 +1,51 @@
 // game-state.ts ----------------------------------------------------------------------------------
-// Defines the GameState class to keep track of the global game state.
+// Defines the GameState class to keep track of the current player and global settings.
 // ------------------------------------------------------------------------------------------------
-import { GameAudio } from './game-audio.js';
-import { GameBoard } from './game-board.js';
 export class GameState {
-    musicSetting = "music-off" /* MusicSetting.OFF */;
-    // TODO: Set SoundSetting = SoundSetting.ON for music to auto-play when the Play button is clicked.
-    soundSetting = "sound-on" /* SoundSetting.ON */;
-    static gameAudio = new GameAudio();
-    static playerOneGameBoard = new GameBoard();
-    static playerTwoGameBoard = new GameBoard();
-    // TODO: Remove duplicate audio methods between GameSate and GameAudio.
-    playMusic() {
-        if (this.musicSetting == "music-on" /* MusicSetting.ON */ && GameState.gameAudio.isPaused()) {
-            GameState.gameAudio.playMusic();
-        }
+    // Current player
+    // TODO: Access currentPlayer.
+    // private currentPlayer: Constants.Player = Constants.Player.PLAYER_ONE;
+    // Game settings
+    // TODO: Access gameMode and gameDifficulty.
+    // private gameMode!: Constants.GameMode;
+    // private gameDifficulty!: Constants.GameDifficulty;
+    // Audio settings
+    // TODO: Set Constants.MusicSetting = Constants.MusicSetting.ON for music to auto-play when the Play button is clicked.
+    musicSetting = "music-off" /* Constants.MusicSetting.OFF */;
+    soundSetting = "sound-on" /* Constants.SoundSetting.ON */;
+    /*
+    public setCurrentPlayer(currentPlayer:  Constants.Player): void {
+        this.currentPlayer = currentPlayer;
     }
-    pauseMusic() {
-        if (this.musicSetting == "music-off" /* MusicSetting.OFF */ && !GameState.gameAudio.isPaused()) {
-            GameState.gameAudio.pauseMusic();
-        }
+
+    public setGameMode(gameMode: Constants.GameMode): void {
+        this.gameMode = gameMode;
     }
-    toggleMusicSetting() {
-        if (this.musicSetting == "music-on" /* MusicSetting.ON */) {
-            this.musicSetting = "music-off" /* MusicSetting.OFF */;
-        }
-        else {
-            this.musicSetting = "music-on" /* MusicSetting.ON */;
-        }
-        GameState.gameAudio.toggleMusic();
+
+    public setGameDifficulty(gameDifficulty: Constants.GameDifficulty): void {
+        this.gameDifficulty = gameDifficulty;
     }
-    toggleSoundSetting() {
-        if (this.soundSetting == "sound-on" /* SoundSetting.ON */) {
-            this.soundSetting = "sound-off" /* SoundSetting.OFF */;
-        }
-        else {
-            this.soundSetting = "sound-on" /* SoundSetting.ON */;
-        }
-    }
+    */
     getMusicSetting() {
         return this.musicSetting;
     }
     getSoundSetting() {
         return this.soundSetting;
+    }
+    toggleMusicSetting() {
+        if (this.musicSetting === "music-on" /* Constants.MusicSetting.ON */) {
+            this.musicSetting = "music-off" /* Constants.MusicSetting.OFF */;
+        }
+        else {
+            this.musicSetting = "music-on" /* Constants.MusicSetting.ON */;
+        }
+    }
+    toggleSoundSetting() {
+        if (this.soundSetting === "sound-on" /* Constants.SoundSetting.ON */) {
+            this.soundSetting = "sound-off" /* Constants.SoundSetting.OFF */;
+        }
+        else {
+            this.soundSetting = "sound-on" /* Constants.SoundSetting.ON */;
+        }
     }
 }
