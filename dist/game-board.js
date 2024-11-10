@@ -5,6 +5,7 @@ import * as Constants from './constants.js';
 export class GameBoard {
     board = this.initBoard();
     shipPositions = new Map();
+    // private gameBoardElement = document.querySelector
     initBoard() {
         return Array.from({ length: Constants.BOARD_SIZE }, () => Array(Constants.BOARD_SIZE).fill(0 /* Constants.BoardTile.WATER */));
     }

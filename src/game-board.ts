@@ -7,6 +7,7 @@ import * as Constants from './constants.js';
 export class GameBoard {
     private board: Constants.Board = this.initBoard();
     private shipPositions: Map<Constants.ShipName, Constants.Coordinate[]> = new Map();
+    // private gameBoardElement = document.querySelector
 
     private initBoard(): Constants.BoardTile[][] {
         return Array.from({ length: Constants.BOARD_SIZE }, () =>
@@ -96,4 +97,31 @@ export class GameBoard {
         const boardString = this.board.map(row => row.map(boardTile => (boardTile == Constants.BoardTile.WATER ? 'O' : 'X')).join(' ')).join('\n');
         console.log(boardString);
     }
+
+    /*
+    private createGrid(): void {
+        for (let i = 0; i < Constants.BOARD_SIZE * Constants.BOARD_SIZE; i++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+            this.gameBoardElement.appendChild(cell);
+        }
+    }
+
+    public renderBoard(): void {
+        // Clear existing content in each cell
+        Array.from(this.gameBoardElement.children).forEach((cell, index) => {
+            cell.innerHTML = ""; // Clear any existing sprites
+            const row = Math.floor(index / Constants.BOARD_SIZE);
+            const col = index % Constants.BOARD_SIZE;
+
+            // Check if there's a ship in this cell
+            if (this.board[row][col] === Constants.BoardTile.SHIP) {
+                const shipImg = document.createElement("img");
+                shipImg.src = "path/to/ship-sprite.png"; // Set correct path
+                shipImg.classList.add("ship-sprite");
+                cell.appendChild(shipImg);
+            }
+        });
+    }
+    */
 }

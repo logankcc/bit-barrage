@@ -4,56 +4,31 @@
 
 // TODO: Clean up imports.
 import * as Constants from './constants.js';
-import { ScreenElement } from './screen-element.js';
+import { StateManager } from './state-manager.js';
+import { ScreenManager } from './screen-manager.js';
 import { GameManager } from './game-manager.js';
+import { ScreenElement, getScreenElement } from './screen-element.js';
 import { warnElementNull } from './utility.js'
 
 export abstract class Screen {
     protected screenID: Constants.ScreenID;
-    protected screenElement: Constants.HTMLElementOrNull;
-    static previousElement: Constants.HTMLElementOrNull = null;
+    private screenElement: HTMLElement;
+    private stateManager: StateManager;
+    private screenManager: ScreenManager;
+    private gameManager: GameManager;
 
     constructor(screenID: Constants.ScreenID) {
         this.screenID = screenID;
-        this.screenElement = this.getScreenElement(screenID);
-    }
-
-    private getScreenElement(screenID: Constants.ScreenID): Constants.HTMLElementOrNull {
-        switch (screenID) {
-            case Constants.ScreenID.HOME:
-                return ScreenElement.home;
-            case Constants.ScreenID.INSTRUCTIONS:
-                return ScreenElement.instructions;
-            case Constants.ScreenID.SELECT_GAME_MODE:
-                return ScreenElement.selectGameMode;
-            case Constants.ScreenID.SELECT_DIFFICULTY:
-                return ScreenElement.selectDifficulty;
-            case Constants.ScreenID.FLEET_DEPLOYMENT:
-                return ScreenElement.fleetDeployment;
-            default:
-                console.warn(`Unknown screen ID: ${screenID}!`);
-                return null;
-        }
+        this.screenElement = getScreenElement(screenID);
+        this.stateManager = StateManager.getInstance();
+        this.screenManager = ScreenManager.getInstance();
+        this.gameManager = GameManager.getInstance();
     }
 
     abstract initListeners(): void;
 
-    private toggleScreenDisplay(screenElement: Constants.HTMLElementOrNull, displayStyle: string): void {
-        if (screenElement) {
-            screenElement.style.display = displayStyle;
-        } else {
-            console.warn("Element is null!");
-        }
-    }
-
-    private changeScreen(nextScreenElement: Constants.HTMLElementOrNull): void {
-        Screen.previousElement = this.screenElement;
-        this.toggleScreenDisplay(this.screenElement, 'none');
-        this.toggleScreenDisplay(nextScreenElement, 'flex');
-    }
-
     // TODO: Remove message parameter.
-    protected initButtonListener(buttonElement: Constants.HTMLElementOrNull, message: string | null = null): void {
+    protected initButtonListener(buttonElement: HTMLElement | null, message: string | null = null): void {
         if (buttonElement && message) {
             buttonElement.addEventListener('click', () => console.log(message));
         } else if (buttonElement) {
@@ -65,39 +40,39 @@ export abstract class Screen {
                 /*
                 buttonElement.addEventListener('click', () => {
                     Screen.gameState.playMusic();
-                    this.changeScreen(nextScreenElement);
+                    this.screenManager.changeScreen(nextScreenElement);
                 });
                 */
-                buttonElement.addEventListener('click', () => this.changeScreen(nextScreenElement));
+                buttonElement.addEventListener('click', () => this.screenManager.changeScreen(nextScreenElement));
             } else if (buttonElement.id == Constants.ButtonID.SINGLE_PLAYER) {
                 buttonElement.addEventListener('click', () => {
                     // TODO: Update game mode.
                     // GameManager.gameState.setGameMode(Constants.GameMode.SINGLE_PLAYER);
-                    this.changeScreen(nextScreenElement);
+                    this.screenManager.changeScreen(nextScreenElement);
                 });
             } else if (buttonElement.id == Constants.ButtonID.MULTI_PLAYER) {
                 buttonElement.addEventListener('click', () => {
                     // TODO: Update game mode.
                     // GameManager.gameState.setGameMode(Constants.GameMode.MULTI_PLAYER);
-                    this.changeScreen(nextScreenElement);
+                    this.screenManager.changeScreen(nextScreenElement);
                 });
             } else if (buttonElement.id == Constants.ButtonID.EASY) {
                 buttonElement.addEventListener('click', () => {
                     // TODO: Update game state.
                     // GameManager.gameState.setGameDifficulty(Constants.GameDifficulty.EASY);
-                    this.changeScreen(nextScreenElement);
+                    this.screenManager.changeScreen(nextScreenElement);
                 });
             } else if (buttonElement.id == Constants.ButtonID.HARD) {
                 buttonElement.addEventListener('click', () => {
                     // TODO: Update game state.
                     // GameManager.gameState.setGameDifficulty(Constants.GameDifficulty.HARD);
-                    this.changeScreen(nextScreenElement);
+                    this.screenManager.changeScreen(nextScreenElement);
                 });
             } else if (buttonElement.id == Constants.ButtonID.READY_BUTTON) {
                 // TODO: Remove this test block.
-                buttonElement.addEventListener('click', () => GameManager.playerOneGameBoard.printBoard());
+                buttonElement.addEventListener('click', () => this.gameManager.getPlayerOneGameBoard().printBoard());
             } else {
-                buttonElement.addEventListener('click', () => this.changeScreen(nextScreenElement));
+                buttonElement.addEventListener('click', () => this.screenManager.changeScreen(nextScreenElement));
             }
         } else {
             console.warn("Element is null!");
@@ -107,7 +82,7 @@ export abstract class Screen {
     protected initInstructionsButtonListener(): void {
         const instructionsButtonElement = this.screenElement ? this.screenElement.querySelector(Constants.ButtonClass.INSTRUCTIONS_BUTTON) : null;
         if (instructionsButtonElement) {
-            instructionsButtonElement.addEventListener('click', () => this.changeScreen(document.getElementById(Constants.ScreenID.INSTRUCTIONS)));
+            instructionsButtonElement.addEventListener('click', () => this.screenManager.changeScreen(document.getElementById(Constants.ScreenID.INSTRUCTIONS)));
         } else {
             console.warn("Instructions Button element is null!");
         }
@@ -118,13 +93,13 @@ export abstract class Screen {
         if (backButtonElement) {
             switch (this.screenID) {
                 case Constants.ScreenID.INSTRUCTIONS:
-                    backButtonElement.addEventListener('click', () => this.changeScreen(Screen.previousElement));
+                    backButtonElement.addEventListener('click', () => this.screenManager.changeScreen(this.stateManager.getPreviousScreen()));
                     break;
                 case Constants.ScreenID.SELECT_GAME_MODE:
-                    backButtonElement.addEventListener('click', () => this.changeScreen(ScreenElement.home));
+                    backButtonElement.addEventListener('click', () => this.screenManager.changeScreen(ScreenElement.home));
                     break;
                 case Constants.ScreenID.SELECT_DIFFICULTY:
-                    backButtonElement.addEventListener('click', () => this.changeScreen(ScreenElement.selectGameMode));
+                    backButtonElement.addEventListener('click', () => this.screenManager.changeScreen(ScreenElement.selectGameMode));
                     break;
                 default:
                     console.warn("Unknown element ID!");
@@ -136,7 +111,7 @@ export abstract class Screen {
     }
 
     private toggleMusicButton(): void {
-        const musicSetting: Constants.MusicSetting = GameManager.gameState.getMusicSetting();
+        const musicSetting: Constants.MusicSetting = this.stateManager.getMusicSetting();
         const musicButtonElementList = document.querySelectorAll(Constants.ButtonClass.MUSIC_BUTTON);
 
         musicButtonElementList.forEach(musicButtonElement => {
@@ -149,8 +124,8 @@ export abstract class Screen {
             }
         });
 
-        GameManager.gameState.toggleMusicSetting();
-        GameManager.gameAudio.toggleMusic();
+        this.stateManager.toggleMusicSetting();
+        this.gameManager.getGameAudio().toggleMusic();
     }
 
     protected initMusicButtonListener(): void {
@@ -163,7 +138,7 @@ export abstract class Screen {
     }
 
     private toggleSoundButton(): void {
-        const soundSetting: Constants.SoundSetting = GameManager.gameState.getSoundSetting();
+        const soundSetting: Constants.SoundSetting = this.stateManager.getSoundSetting();
         const soundButtonElementList = document.querySelectorAll(Constants.ButtonClass.SOUND_BUTTON);
 
         soundButtonElementList.forEach(soundButtonElement => {
@@ -178,9 +153,9 @@ export abstract class Screen {
             }
         });
 
-        GameManager.gameState.toggleSoundSetting();
+        this.stateManager.toggleSoundSetting();;
         // TODO: Implement gameAudio.toggleSound();
-        // GameManager.gameAudio.toggleSound();
+        // this.gameManager.gameAudio.toggleMusic();
     }
 
     protected initSoundButtonListener(): void {

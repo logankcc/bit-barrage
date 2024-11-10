@@ -16,8 +16,6 @@ export type Board = BoardTile[][];
 
 export type Coordinate = [number, number];
 
-export type HTMLElementOrNull = HTMLElement | null;
-
 // ------------------------------------------------------------------------------------------------
 // Enums
 // ------------------------------------------------------------------------------------------------
@@ -83,6 +81,7 @@ export const enum ButtonID {
     MULTI_PLAYER = 'multi-player-button',
     EASY = 'easy-button',
     HARD = 'hard-button',
+    SHUFFLE_BUTTON = 'shuffle-button',
     READY_BUTTON = 'ready-button'
 }
 

@@ -6,7 +6,7 @@ import { GameManager } from './game-manager.js';
 import { warnElementNull } from './utility.js';
 export class FleetDeploymentScreen extends Screen {
     constructor() {
-        super("fleet-deployment-screen" /* ScreenID.FLEET_DEPLOYMENT */);
+        super("fleet-deployment-screen" /* Constants.ScreenID.FLEET_DEPLOYMENT */);
     }
     initListeners() {
         this.initShuffleButton(document.getElementById('shuffle-button'));
@@ -19,11 +19,11 @@ export class FleetDeploymentScreen extends Screen {
         if (buttonElement) {
             buttonElement.addEventListener('click', () => {
                 console.log('Shuffle button pressed!');
-                GameManager.playerOneGameBoard.shuffleShips();
+                GameManager.getInstance().getPlayerOneGameBoard().shuffleShips();
             });
         }
         else {
-            warnElementNull('shuffle-button');
+            warnElementNull("shuffle-button" /* Constants.ButtonID.SHUFFLE_BUTTON */);
         }
     }
 }
